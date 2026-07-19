@@ -1,5 +1,5 @@
 #!/bin/bash
-AMI_ID="ami-01edba92f9036f76e"
+AMI_ID="ami-0220d79f3f480ecf5"
 SG_ID="sg-0f1b4f5f9a6d240f1"
 
 for instance in $@
