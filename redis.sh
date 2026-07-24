@@ -32,19 +32,19 @@ dnf module disable redis -y &>>LOG_FILE
 VALIDATION $? "disabling default redis" 
 
 dnf module enable redis:7 -y &>>LOG_FILE
-VALIDATION $? "enable redis:7" 
+VALIDATION $? "enabling redis:7" 
 
 dnf install redis -y  &>>LOG_FILE
-VALIDATION $? "install redis" 
+VALIDATION $? "installing redis" 
 
 sed -i -e 's/127.0.0.1/0.0.0.0/g' -e '/protected-mode/ c protected-mode no' /etc/redis/redis.conf
 VALIDATION $? "allowing remote connections to the redis" 
 
 systemctl enable redis &>>LOG_FILE
-VALIDATION $? "enable redis" 
+VALIDATION $? "enabling redis" 
 
 systemctl start redis &>>LOG_FILE
-VALIDATION $? "start redis" 
+VALIDATION $? "starting redis" 
 
 END_TIME=$(date +%s)
 TOTAL_TIME=$(( $END_TIME - $START_TIME ))
