@@ -26,6 +26,7 @@ VALIDATION(){
        exit 1
     else 
        echo "$2 ... $G SUCCESS $N" | tee -a $LOG_FILE
+    fi
 }
 
 dnf install maven -y
