@@ -23,6 +23,7 @@ VALIDATION(){
          exit 1
       else
          echo -e "$2... $G SUCCESS $N" | tee -a $LOG_FILE
+      fi
 }
 
 dnf install mysql-server -y &>>$LOG_FILE
