@@ -78,7 +78,7 @@ VALIDATION $? "copy mongo repo"
 dnf install mongodb-mongosh -y &>>$LOG_FILE
 VALIDATION $? "install mongodb client"
 
-INDEX=$(mongosh mongodb.daws86s.fun --quiet --eval "db.getMongo().getDBNames().indexOf('catalogue')") &>>LOG_FILE
+INDEX=$(mongosh mongodb.ram86s.fun --quiet --eval "db.getMongo().getDBNames().indexOf('catalogue')") &>>LOG_FILE
 if [ $INDEX -le 0 ]; then
     mongosh --host $MONGODB_HOST </app/db/master-data.js 
     VALIDATE $? "Load catalogue products"
