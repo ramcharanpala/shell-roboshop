@@ -39,7 +39,7 @@ dnf install nginx -y &>>$LOG_FILE
 VALIDATION $? "installing nginx"
 
 systemctl enable nginx &>>$LOG_FILE
-VALIDATIN $? "enabling nginx"
+VALIDATION $? "enabling nginx"
 
 systemctl start nginx
 VALIDATION $? "starting nginx"
