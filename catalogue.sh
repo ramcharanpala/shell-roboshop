@@ -31,7 +31,7 @@ VALIDATION(){
 }
 
 dnf module disable nodejs -y &>>$LOG_FILE
-VALIDATION $? "disabling nodejs module"
+VALIDATION $? "disabling nodejs"
 
 dnf module enable nodejs:20 -y &>>$LOG_FILE
 VALIDATION $? "enabling nodejs module 20"
