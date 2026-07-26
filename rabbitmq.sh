@@ -29,22 +29,22 @@ VALIDATION(){
     fi
 }
 
-cp $SCRIPT_DIR/rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo &>>LOG_FILE
+cp $SCRIPT_DIR/rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo &>>$LOG_FILE
 VALIDATION $? "adding rabbitmq.repo"
 
-dnf install rabbitmq-server -y &>>LOG_FILE
+dnf install rabbitmq-server -y &>>$LOG_FILE
 VALIDATION $? "installing rabbitmq-server"
 
-systemctl enable rabbitmq-server &>>LOG_FILE
+systemctl enable rabbitmq-server &>>$LOG_FILE
 VALIDATION $? "enabling rabbitmq-server"
 
-systemctl start rabbitmq-server &>>LOG_FILE
+systemctl start rabbitmq-server &>>$LOG_FILE
 VALIDATION $? "starting rabbitmq-sercer"
 
-rabbitmqctl add_user roboshop roboshop123 &>>LOG_FILE
+rabbitmqctl add_user roboshop roboshop123 &>>$LOG_FILE
 VALIDATION $? "adding use"
 
-rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>LOG_FILE
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>$LOG_FILE
 VALIDATION $? "setting up permissions"
 
 
