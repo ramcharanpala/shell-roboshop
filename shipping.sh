@@ -32,7 +32,7 @@ VALIDATION(){
 dnf install maven -y
 VALIDATION $? "install maven"
 
-id roboshop &>>LOG_FILE
+id roboshop &>>$LOG_FILE
 if [ $? -ne 0 ]; then
     useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop"
     VALIDATION $? "creating system user"
@@ -43,7 +43,7 @@ fi
 mkdir -p /app 
 VALIDATION $? "create app directory" 
 
-curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip &>>LOG_FILE
+curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip &>>$LOG_FILE
 VALIDATION $? "downloading shipping applications"
 
 cd /app 
@@ -52,20 +52,20 @@ VALIDATION $? "changing to app directory"
 rm -rf /app/*
 VALIDATION $? "removing existing code"
 
-unzip /tmp/shipping.zip &>>LOG_FILE
+unzip /tmp/shipping.zip &>>$LOG_FILE
 VALIDATION $? "unzip shipping"
  
-mvn clean package &>>LOG_FILE
+mvn clean package &>>$LOG_FILE
 mv target/shipping-1.0.jar shipping.jar 
 
 cp $SCRIPT_DIR/shipping.service /etc/systemd/system/shipping.service
 systemctl daemon-reload
 
-systemctl enable shipping &>>LOG_FILE
+systemctl enable shipping &>>$LOG_FILE
 
-dnf install mysql -y &>>LOG_FILE
+dnf install mysql -y &>>$LOG_FILE
 
-mysql -h $MYSQL_HOST -uroot -pRoboShop@1 -e 'use cities' &>>LOG_FILE
+mysql -h $MYSQL_HOST -uroot -pRoboShop@1 -e 'use cities' &>>$LOG_FILE
 if [ $? -ne 0 ]; then
    mysql -h  $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/schema.sql &>>LOG_FILE
    mysql -h  $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/app-user.sql &>>LOG_FILE
@@ -74,4 +74,4 @@ else
    echo -e "shipping data is already loaded ... $Y SKIPPING $N"
 fi
 
-systemctl restart shipping
+systemctl restart shipping 
