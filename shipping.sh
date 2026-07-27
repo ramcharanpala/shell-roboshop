@@ -16,7 +16,7 @@ MYSQL_HOST="mysql.ram86s.fun"
 mkdir -p $LOGS_FOLDER
 echo "script execution started at:: $(date)" | tee -a $LOG_FILE
 
-if [ $USERID _ne 0 ]; then
+if [ $USERID -ne 0 ]; then
    echo "ERROR:: please run this script at root privelege"
    exit 1
 fi
@@ -35,7 +35,7 @@ VALIDATION $? "install maven"
 
 id roboshop &>>$LOG_FILE
 if [ $? -ne 0 ]; then
-    useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop"
+    useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE
     VALIDATION $? "creating system user"
 else
     echo -e "system user already exists ... $Y SKIPPING $N"
