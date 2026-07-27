@@ -16,21 +16,21 @@ MYSQL_HOST="mysql.ram86s.fun"
 mkdir -p $LOGS_FOLDER
 echo "script execution started at:: $(date)" | tee -a $LOG_FILE
 
-if [ USERID _ne 0 ]; then
+if [ $USERID _ne 0 ]; then
    echo "ERROR:: please run this script at root privelege"
    exit 1
 fi
 
 VALIDATION(){
     if [ $1 -ne 0 ]; then
-       echo "$2 ... $R FAILURE $N" | tee -a $LOG_FILE
+       echo -e "$2 ... $R FAILURE $N" | tee -a $LOG_FILE
        exit 1
     else 
-       echo "$2 ... $G SUCCESS $N" | tee -a $LOG_FILE
+       echo -e "$2 ... $G SUCCESS $N" | tee -a $LOG_FILE
     fi
 }
 
-dnf install maven -y
+dnf install maven -y &>>$LOG_FILE
 VALIDATION $? "install maven"
 
 id roboshop &>>$LOG_FILE
