@@ -75,4 +75,4 @@ else
    echo -e "shipping data is already loaded ... $Y SKIPPING $N"
 fi
 
-systemctl restart shipping 
+systemctl restart shipping
