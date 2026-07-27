@@ -8,11 +8,12 @@ N="\e[0m"
 
 LOGS_FOLDER="/var/log/shell-roboshop"
 SCRIPT_NAME=$( echo $0 | cut -d "." -f1 )
+SCRIPT_DIR=$PWD
+MONGODB_HOST=mongodb.ram86s.fun
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
 MYSQL_HOST="mysql.ram86s.fun"
 
 mkdir -p $LOGS_FOLDER
-SCRIPT_DIR=$PWD
 echo "script execution started at:: $(date)" | tee -a $LOG_FILE
 
 if [ USERID _ne 0 ]; then
